@@ -1,11 +1,5 @@
-## install
-```ts
-npm install @171h/log
-```
+import { Logger } from "../index";
 
-## useage
-```ts
-import { Logger } from '@171h/log'
 const logger = new Logger("demo.ts");
 
 const fn = () => {
@@ -24,9 +18,3 @@ const fn = () => {
 };
 
 fn();
-```
-// output
-![](./assets/Snipaste_2023-04-19_17-32-40.png)
-
-
-

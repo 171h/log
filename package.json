@@ -1,0 +1,30 @@
+{
+  "name": "@171h/log",
+  "version": "1.0.0",
+  "description": "封装了 console.log 日志输出",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "release": "tsc && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/171H/log.git"
+  },
+  "keywords": [
+    "log",
+    "console",
+    "logger"
+  ],
+  "author": "171H",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/171H/log/issues"
+  },
+  "homepage": "https://github.com/171H/log#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "typescript": "^5.0.4"
+  }
+}
