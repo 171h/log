@@ -1,4 +1,6 @@
 import chalk from "chalk";
+import findup from "findup-sync";
+import fs from "fs";
 
 const logLevel = {
   verbo: 100,
@@ -31,13 +33,25 @@ const sym: Sym = {
 
 export type LogLevel = keyof typeof logLevel;
 
+export interface Config {
+  logLevel: LogLevel;
+}
+
+const configPath = findup("log.config.json");
+let levelDefault: tag = "verbo";
+if (configPath) {
+  const ctnt = fs.readFileSync(configPath, "utf-8");
+  const config = JSON.parse(ctnt) as Config;
+  levelDefault = config?.logLevel || "verbo";
+}
+
 /**
  * 日志记录器
  */
 export class Logger {
-  constructor(context: string) {
+  constructor(context: string, level?: LogLevel) {
     this.context = context;
-    this.level = "verbo";
+    this.level = level || levelDefault;
   }
 
   private context: string;
@@ -56,11 +70,11 @@ export class Logger {
     if (message instanceof Function) fnName = message.name;
     else fnName = message.toLocaleString();
     let print = `${sym[type]}  [${new Date().toLocaleString()}] [${type.toUpperCase()}] [${this.context}] [${fnName}] `;
-    if(type === "error") print = chalk.red(print);
-    if(type === "warn") print = chalk.yellow(print);
-    if(type === "info") print = chalk.blue(print);
-    if(type === "verbo") print = chalk.green(print);
-    return print
+    if (type === "error") print = chalk.red(print);
+    if (type === "warn") print = chalk.yellow(print);
+    if (type === "info") print = chalk.blue(print);
+    if (type === "verbo") print = chalk.green(print);
+    return print;
   }
 
   private __log(tag: tag, message?: any, ...optionalParams: any[]) {
