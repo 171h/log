@@ -1,6 +1,7 @@
 import chalk from "chalk";
-import findup from "findup-sync";
 import fs from "fs";
+import fq from 'fast-glob';
+
 
 const logLevel = {
   verbo: 100,
@@ -37,7 +38,7 @@ export interface Config {
   logLevel: LogLevel;
 }
 
-const configPath = findup("log.config.json");
+const configPath = fq.sync("log.config.json")[0];
 let levelDefault: tag = "verbo";
 if (configPath) {
   const ctnt = fs.readFileSync(configPath, "utf-8");
