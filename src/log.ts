@@ -1,7 +1,4 @@
 import chalk from "chalk";
-import fs from "fs";
-import fq from 'fast-glob';
-
 
 const logLevel = {
   verbo: 100,
@@ -38,13 +35,7 @@ export interface Config {
   logLevel: LogLevel;
 }
 
-const configPath = fq.sync("log.config.json")[0];
-let levelDefault: tag = "verbo";
-if (configPath) {
-  const ctnt = fs.readFileSync(configPath, "utf-8");
-  const config = JSON.parse(ctnt) as Config;
-  levelDefault = config?.logLevel || "verbo";
-}
+const levelDefault: tag = "verbo";
 
 /**
  * 日志记录器
@@ -113,3 +104,4 @@ export class Logger {
     this.__log("error", message, ...optionalParams);
   }
 }
+
