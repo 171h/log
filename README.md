@@ -31,17 +31,18 @@ fn();
 
 
 ### config
-在项目根目录创建 `log.config.json` 配置日志输出级别，默认 `logLevel` 为 `verbo` 输出所有日志。
+- 在项目根目录创建 `log.config.json` 配置日志输出级别，默认 `logLevel` 为 `verbo` 输出所有日志。
+- `log.config.json` 配置文件仅在 `1.2.0` 和 `1.3.0` 版本支持，且仅在 `Node.js` 环境可用。
 
 #### 日志等级
 `verbo < debug < info/log < warn < error < close`
 
 ##### 设置日志级别全局为 debug
 大于等于 debug 级别的日志会输出
-// log.config.json
+// log.config.json。`log.config.json` 配置文件仅在 `1.2.0` 和 `1.3.0` 版本支持，且仅在 `Node.js` 环境可用。
 ```
 {
-  "logLevel": "debug" // 
+  "logLevel": "debug"
 }
 ```
 
@@ -54,8 +55,8 @@ fn();
 }
 ```
 
-#### 为每个 Logger 设置设置日志等级
-实例的日志等级优先级高于全局，下面这个 logger 的日志等级为 dubug。
+#### 为每个 logger 实例设置日志等级
+实例的日志等级优先级高于全局配置文件，下面这个 logger 的日志等级为 debug。
 ```ts
 const logger = new Logger("demo.ts","debug");
 ```
