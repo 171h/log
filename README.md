@@ -3,7 +3,7 @@
 npm install @171h/log
 ```
 
-### useage
+### usage
 ```ts
 import { Logger } from '@171h/log'
 const logger = new Logger("demo.ts");
