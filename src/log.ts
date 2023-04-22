@@ -22,7 +22,7 @@ interface Sym {
 
 const sym: Sym = {
   verbo: "✔",
-  debug: " ",
+  debug: "🐛",
   info: "ℹ", //✨
   warn: "⚠",
   error: "✖",
