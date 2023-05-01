@@ -11,23 +11,14 @@ const logLevel = {
 
 type tag = "verbo" | "debug" | "info" | "warn" | "error" | "close";
 
-interface Sym {
-  verbo: string;
-  debug: string;
-  info: string;
-  warn: string;
-  error: string;
-  close: string;
+export interface Sym {
+  verbo?: string;
+  debug?: string;
+  info?: string;
+  warn?: string;
+  error?: string;
+  close?: string;
 }
-
-const sym: Sym = {
-  verbo: "✔",
-  debug: "🐛",
-  info: "ℹ", //✨
-  warn: "⚠",
-  error: "✖",
-  close: "",
-};
 
 export type LogLevel = keyof typeof logLevel;
 
@@ -41,9 +32,10 @@ const levelDefault: tag = "verbo";
  * 日志记录器
  */
 export class Logger {
-  constructor(context: string, level?: LogLevel) {
+  constructor(context: string, level?: LogLevel, sym?: Sym) {
     this.context = context;
     this.level = level || levelDefault;
+    this.sym = Object.assign(this.sym, sym);
   }
 
   private context: string;
@@ -55,13 +47,23 @@ export class Logger {
     warn: "warn",
     error: "error",
   };
+  private sym: Sym = {
+    verbo: "✔",
+    debug: "🐛",
+    info: "ℹ", //✨
+    warn: "⚠",
+    error: "✖",
+    close: "",
+  }
 
   // 日志前缀
   private prefix(type: tag, message?: any) {
     let fnName: string | undefined = "";
-    if (message instanceof Function) fnName = message.name;
-    else fnName = message.toLocaleString();
-    let print = `${sym[type]}  [${new Date().toLocaleString()}] [${type.toUpperCase()}] [${this.context}] [${fnName}] `;
+    if (message instanceof Function)
+      fnName = message.name;
+    else 
+      fnName = message.toLocaleString();
+    let print = `${this.sym[type]}  [${new Date().toLocaleString()}] [${type.toUpperCase()}] [${this.context}] [${fnName}] `;
     if (type === "error") print = chalk.red(print);
     if (type === "warn") print = chalk.yellow(print);
     if (type === "info") print = chalk.blue(print);
