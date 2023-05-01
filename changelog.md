@@ -1,3 +1,16 @@
+## v2.2.0
+
+[compare changes](https://github.com/171H/log/compare/v2.1.0...v2.2.0)
+
+
+### 🚀 Enhancements
+
+  - Enable config prefix symbol ([e8c9416](https://github.com/171H/log/commit/e8c9416))
+
+### ❤️  Contributors
+
+- H171 <1091088708@qq.com>
+
 ### 2.1.0
 - 为 `debug` 增加了 🐛 前缀
 
